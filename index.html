@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title> Plug TV V28 - 20 por Pasta +
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">     Memória</title>
+<link rel="manifest" href="manifest.json">
+<script async src="https/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2263470788888608" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:Arial;padding-bottom:100px}
+.header{background:#111;border-bottom:3px solid #ffcc00;padding:12px;text-align:center;position:sticky;top:0;z-index:20}
+.pix{background:#ffcc00;color:#000;font-weight:900;padding:8px 14px;border-radius:10px;display:inline-block;margin-top:6px;font-size:14px}
+.generos{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.pasta{background:#1c1c1c;border:1px solid #333;border-radius:16px;padding:14px;position:relative}
+.btn-pasta{position:absolute;top:8px;right:8px;background:#ff2222;border:none;color:#fff;border-radius:50%;width:28px;height:28px}
+.btn-open{width:100%;margin-top:10px;background:#ffcc00;border:none;padding:9px;border-radius:10px;font-weight:900}
+.topo-lista{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#111;position:sticky;top:0;z-index:10}
+.filme{background:#1a1a1a;border-left:4px solid #ffcc00;border-radius:12px;margin:8px 10px;padding:10px;display:flex;gap:8px;align-items:center}
+.btn{border:none;padding:10px 12px;border-radius:8px;font-weight:bold}.btn-ver{background:#ffcc00;color:#000}.btn-del{background:#333;color:#fff}
+.barra{position:fixed;bottom:0;left:0;width:100%;background:#111;border-top:2px solid #222;display:flex;gap:5px;padding:8px;z-index:30}
+.barra button{flex:1;padding:13px;border-radius:12px;border:none;font-weight:900;font-size:10px}
+#modalP,#modalG,#modalF{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:999;padding:15px;overflow:auto}
+input,select{width:100%;padding:12px;margin:6px 0;background:#222;color:#fff;border:1px solid #444;border-radius:8px}
+.big{width:100%;padding:16px;background:#00ff88;color:#000;border:none;border-radius:12px;font-weight:900;font-size:15px;margin:8px 0}
+</style>
+</head>
+<body>
+
+<div class="header">
+🔌 <b>PLUG TV GRATIDÃO V28</b><br>
+<div class="pix">💰 PIX: 025.446.319-37 • JOSÉ MARCOS</div><br>
+<small>20 por pasta + 📱 Direto da Memória</small>
+</div>
+
+<div id="telaGeneros"></div>
+<div id="telaFilmes" style="display:none"></div>
+
+<div class="barra">
+<button style="background:#00ff88" onclick="abrirAddDireto()">📱 MEMÓRIA</button>
+<button style="background:#ffcc00" onclick="abrirGenero()">➕ GÊNERO</button>
+<button style="background:#00aaff;color:#fff" onclick="document.getElementById('fileMulti').click()">📂 VÁRIOS</button>
+<button style="background:#fff" onclick="resetar()">🔄 RESET 20</button>
+</div>
+
+<input type="file" id="fileInput" accept="video/*" style="display:none">
+<input type="file" id="fileMulti" accept="video/*" multiple style="display:none">
+
+<div id="modalP" style="background:#000"><button onclick="fecharP()" style="position:absolute;top:10px;right:10px;background:#ffcc00;border:none;padding:10px 15px;border-radius:10px;font-weight:bold;z-index:10">✕ FECHAR</button><video id="v" controls autoplay style="width:100%;height:85%;margin-top:50px"></video><iframe id="yt" style="width:100%;height:85%;margin-top:50px;display:none" allowfullscreen frameborder="0"></iframe></div>
+<div id="modalG"><h2 style="color:#ffcc00">➕ Nova Pasta</h2><input id="nomeGenero" placeholder="Nome"><button onclick="salvarGenero()" style="width:100%;padding:14px;background:#ffcc00;border:none;border-radius:10px;font-weight:900">CRIAR</button><button onclick="fecharModais()" style="width:100%;padding:10px;background:#333;color:#fff;border:none;border-radius:10px;margin-top:8px">Voltar</button></div>
+<div id="modalF"><h2 style="color:#00ff88">📱 Add da Memória (sem link)</h2><select id="fGenero"></select><div id="nomeArquivo" style="background:#111;padding:10px;border-radius:8px;color:#00ff88;margin:6px 0;display:none"></div><button class="big" onclick="document.getElementById('fileInput').click()">📂 ESCOLHER FILME DO CELULAR</button><button id="btnSalvar" onclick="salvarDaMemoria()" style="display:none;width:100%;padding:14px;background:#ffcc00;border:none;border-radius:10px;font-weight:900">✅ SALVAR NA PASTA</button><button onclick="fecharModais()" style="width:100%;padding:10px;background:#333;color:#fff;border:none;border-radius:10px;margin-top:8px">Cancelar</button></div>
+
+<script>
+function gerar20(prefix, tipoBase){
+ let lista=[];
+ for(let i=1;i<=20;i++){
+  lista.push({nome:`${prefix} ${i}`, tipo: i%3==0?'youtube':'mp4', link: i%3==0?`https://www.youtube-nocookie.com/embed/${['jfKfPfyJRdk','2YBtspm8j8M','dQw4w9WgXcQ','jNQXAC9IVRw','CevxZvSJLk8'][i%5]}?autoplay=1` : `https://test-videos.co.uk/vids/${['sintel','bigbuckbunny','jellyfish'][i%3]}/mp4/h264/720/${['Sintel_Trailer','Big_Buck_Bunny','Jellyfish'][i%3]}_720_10s_1MB.mp4`});
+ }
+ return lista;
+}
+let padraoBase=[
+ {nome:"🔥 Ação - 20 Filmes", filmes: gerar20("Ação", "Ação")},
+ {nome:"❤️ Romance - 20 Filmes", filmes: gerar20("Romance", "Romance")},
+ {nome:"😱 Terror - 20 Filmes", filmes: gerar20("Terror", "Terror")},
+ {nome:"😂 Comédia - 20 Filmes", filmes: gerar20("Comédia", "Comédia")},
+ {nome:"📺 Séries - 20 Séries", filmes: gerar20("[SÉRIE] Série", "Série")}
+];
+
+let dados = JSON.parse(localStorage.getItem('plugtv28') || JSON.stringify(padraoBase));
+let pastaAtual=null, arquivoTemp=null, arquivoNomeTemp='', db;
+let req=indexedDB.open('PlugTV28',1);
+req.onupgradeneeded=e=>e.target.result.createObjectStore('videos',{keyPath:'id'});
+req.onsuccess=e=>{db=e.target.result; renderGeneros();};
+req.onerror=()=>renderGeneros();
+
+function salvarLS(){localStorage.setItem('plugtv28',JSON.stringify(dados));}
+function renderGeneros(){
+ let h='<div class="generos">';
+ dados.forEach((g,i)=>{h+=`<div class="pasta"><button class="btn-pasta" onclick="delGenero(${i})">🗑️</button><h3>${g.nome}</h3><small>${g.filmes.length} vídeos</small><button class="btn-open" onclick="abrirPasta(${i})">ABRIR PASTA</button></div>`});
+ h+='</div>';
+ document.getElementById('telaGeneros').innerHTML=h;
+ document.getElementById('telaGeneros').style.display='block';
+}
+function abrirPasta(i){
+ pastaAtual=i; let g=dados[i];
+ let h=`<div class="topo-lista"><button onclick="voltar()" style="background:#333;color:#fff;border:none;padding:8px 12px;border-radius:8px">⬅️ Voltar</button><b>${g.nome}</b><button onclick="abrirAddDireto(${i})" style="background:#00ff88;border:none;padding:8px 12px;border-radius:8px;font-weight:900">📱 +</button></div>`;
+ g.filmes.forEach((f,idx)=>{
+  let ico=f.tipo=='local'?'📱': f.nome.includes('SÉRIE')?'📺':'🎬';
+  h+=`<div class="filme"><b>${ico} ${f.nome}<br><small style="color:#888">${f.tipo=='local'?'Memória':'Online'}</small></b><button class="btn btn-ver" onclick="playLocal(${i},${idx})">▶️</button><button class="btn btn-del" onclick="delFilme(${i},${idx})">🗑️</button></div>`;
+ });
+ document.getElementById('telaFilmes').innerHTML=h;
+ document.getElementById('telaFilmes').style.display='block';
+ document.getElementById('telaGeneros').style.display='none';
+ window.scrollTo(0,0);
+}
+function voltar(){document.getElementById('telaFilmes').style.display='none';document.getElementById('telaGeneros').style.display='block';}
+function abrirGenero(){document.getElementById('modalG').style.display='block';}
+function salvarGenero(){let n=document.getElementById('nomeGenero').value.trim();if(!n)return alert('Nome');dados.push({nome:n,filmes:gerar20(n, n)});document.getElementById('nomeGenero').value='';salvarLS();renderGeneros();fecharModais();}
+function abrirAddDireto(pre){let sel=document.getElementById('fGenero');sel.innerHTML='';dados.forEach((g,i)=>sel.innerHTML+=`<option value="${i}" ${i==pre?'selected':''}>${g.nome}</option>`);document.getElementById('modalF').style.display='block';}
+document.getElementById('fileInput').addEventListener('change',e=>{let file=e.target.files[0];if(!file)return;arquivoTemp=file;arquivoNomeTemp=file.name;document.getElementById('nomeArquivo').style.display='block';document.getElementById('nomeArquivo').innerText='📄 '+file.name+' ('+(file.size/1024/1024).toFixed(1)+' MB)';document.getElementById('btnSalvar').style.display='block';});
+document.getElementById('fileMulti').addEventListener('change',e=>{
+ let files=e.target.files; if(!files.length)return; let gi=pastaAtual!==null?pastaAtual:0; let c=0;
+ [...files].forEach(file=>{
+  let id='vid_'+Date.now()+'_'+Math.random(); let tx=db.transaction('videos','readwrite'); tx.objectStore('videos').put({id,blob:file});
+  tx.oncomplete=()=>{dados[gi].filmes.push({nome:file.name,tipo:'local',link:id}); c++; if(c==files.length){salvarLS();abrirPasta(gi); alert(c+' filmes da memória salvos em '+dados[gi].nome+'! 📱');}};
+ });
+});
+function salvarDaMemoria(){if(!arquivoTemp)return alert('Escolha'); let gi=document.getElementById('fGenero').value; let id='vid_'+Date.now(); let tx=db.transaction('videos','readwrite'); tx.objectStore('videos').put({id,blob:arquivoTemp}); tx.oncomplete=()=>{dados[gi].filmes.push({nome:arquivoNomeTemp,tipo:'local',link:id}); salvarLS(); renderGeneros(); fecharModais(); document.getElementById('nomeArquivo').style.display='none'; document.getElementById('btnSalvar').style.display='none'; arquivoTemp=null; document.getElementById('fileInput').value=''; alert('Salvo na pasta '+dados[gi].nome+'! 📱');};}
+function playLocal(gi,fi){let f=dados[gi].filmes[fi]; document.getElementById('modalP').style.display='block'; document.getElementById('yt').style.display='none'; document.getElementById('v').style.display='block'; if(f.tipo=='local'){let tx=db.transaction('videos','readonly'); let r=tx.objectStore('videos').get(f.link); r.onsuccess=()=>{let url=URL.createObjectURL(r.result.blob); let v=document.getElementById('v'); v.src=url; v.play();};}else if(f.tipo=='youtube'){document.getElementById('v').style.display='none';document.getElementById('yt').style.display='block';document.getElementById('yt').src=f.link;}else{let v=document.getElementById('v'); if(f.tipo=='m3u8'&&Hls.isSupported()){let h=new Hls();h.loadSource(f.link);h.attachMedia(v);h.on(Hls.Events.MANIFEST_PARSED,()=>v.play());}else{v.src=f.link;v.play();}}}
+function fecharP(){document.getElementById('modalP').style.display='none';document.getElementById('v').pause();document.getElementById('yt').src='';}
+function fecharModais(){document.getElementById('modalG').style.display='none';document.getElementById('modalF').style.display='none';}
+function delGenero(i){if(confirm('Apagar pasta '+dados[i].nome+'? 🗑️')){dados.splice(i,1);salvarLS();renderGeneros();}}
+function delFilme(gi,fi){if(confirm('Apagar '+dados[gi].filmes[fi].nome+'? 🗑️')){let f=dados[gi].filmes[fi]; if(f.tipo=='local'&&db)db.transaction('videos','readwrite').objectStore('videos').delete(f.link); dados[gi].filmes.splice(fi,1); salvarLS(); abrirPasta(gi);}}
+function resetar(){if(confirm('Voltar os 20 filmes em cada pasta?')){localStorage.setItem('plugtv28',JSON.stringify(padraoBase));dados=JSON.parse(JSON.stringify(padraoBase));renderGeneros();}}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
