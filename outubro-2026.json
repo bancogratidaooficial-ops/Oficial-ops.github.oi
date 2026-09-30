@@ -1,0 +1,8 @@
+[
+  {"nome":"Natal","hor":"15:20-22:40","tipo":"5x1","inicio":0},
+  {"nome":"Kaue","hor":"07:00-15:20","tipo":"5x1","inicio":1},
+  {"nome":"Mario (MADRUGADA)","hor":"22:40-07:00","tipo":"5x1","inicio":2},
+  {"nome":"Jose Marcos","hor":"10:00-18:20","tipo":"5x1","inicio":3},
+  {"nome":"FOLGUISTA","hor":"22:40-07:00","tipo":"folguista","inicio":2},
+  {"nome":"Celio Encarregado","hor":"11:00-19:40","tipo":"encarregado","inicio":0}
+]
